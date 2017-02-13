@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body>
+    <div id="header">
+        <h1 id="logo"><i class="fa fa-th"></i>ToDo</h1>
+    </div>
+    <div class="main">
+        <div class="left-content">
+            <div id="alltask"><i class="fa fa-globe"></i>所有任务<span></span></div>
+            <div id="cate-list"><i class="fa fa-list-ul"></i>分类列表</div>
+            <ul id="cate-content">
+<!--
+                    <li>
+                        <h2><i class="fa fa-folder-open"></i>默认主分类<span></span></h2>
+                        <ul>
+                            <li>
+                                <h3><i class="fa fa-file-o"></i>默认子分类<span></span></h3>
+                            </li>
+                        </ul>
+                    </li>
+-->
+<!--
+                    <li>
+                        <h2><i class="fa fa-folder-open"></i>123123<span></span><i class="fa fa-trash-o"></i></h2>
+                        <ul>
+                            <li>
+                                <h3><i class="fa fa-file-o"></i>111<span></span><i class="fa fa-trash-o"></i></h3>
+                            </li>
+                        </ul>
+                    </li>
+-->
+            </ul>
+            <div class="addcate"><i class="fa fa-plus"></i>新增分类</div>
+        </div>
+        <div class="task-content">
+            <div class="status">
+                <div class="statusButton active" id="all">所有</div>
+                <div class="statusButton" id="unfinish">未完成</div>
+                <div class="statusButton" id="finished">已完成</div>
+            </div>
+            <div class="task-list">
+<!--
+                <div>2017-09-06</div>
+                <ul>
+                    <li class="active"><i class="fa fa-check"></i>使用说明<i class="fa fa-trash-o"></i></li>
+                </ul>
+-->
+            </div>
+            <div class="addtask"><i class="fa fa-plus"></i>新增任务</div>
+        </div>
+        <div class="right">
+            <div class="task-title">
+               <h1 id="display-title"></h1>
+                <div class="set">
+                    <i class="fa fa-check-square-o"></i>
+                    <i class="fa fa-pencil-square-o"></i>
+                </div>
+            </div>
+            <div class="task-date">
+                任务日期：
+                <span id="display-date"></span>
+            </div>
+            <div class="right-content">
+                <textarea name="content" id="display-content" class="textarea-content" readonly="readonly" disabled="disabled"></textarea>
+            </div>
+        </div>
+        <div class="rightEdit">
+			<div class="task-title">
+				<h1><input type="text" name="title" id="inputTitle" placeholder="请在此输入任务标题"></h1>
+			</div>
+			<div class="task-date">
+				任务日期：
+				<input type="date" name="date" id="inputDate">
+			</div>
+			<div class="right-content">
+				<textarea class="textarea-content" id="inputContent" placeholder="请在此输入任务内容"></textarea>
+				<div id="buttonArea">
+					<button id="save">保存</button>
+					<button id="exit">取消</button>
+                </div>
+			</div>
+		</div>
+    </div>
+    <div id="cover">
+		<div class="cover-wrap">
+			<div class="cover-wrap-title">新增分类</div>
+			<div class="cover-wrap-content">
+				选择主分类：
+				<select class="cover-wrap-class" id="addCates">
+					<!-- <option>新增主分类</option>
+					<option>百度ife</option> -->
+				</select><br/>
+				新分类名称：
+				<input class="cover-wrap-class" type="text" id="newCateName" placeholder="请在此输入新分类名称">
+			</div>
+			<div class="cover-wrap-footer">
+				<button id="ok">确认</button>
+				<button id="no">取消</button>
+			</div>
+		</div>
+	</div>
+    
+    <script src="js/util.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
