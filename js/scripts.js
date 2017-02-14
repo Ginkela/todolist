@@ -463,13 +463,23 @@ window.onload = function(){
     function cateClick(target){
         var leftContent = document.querySelector('.left-content');
         clearActive(leftContent);
-        addClass(target,'active');
+        if(target.tagName.toLowerCase() == 'h2'){
+            addClass(target,'active');
+        }
+        else if(target.parentNode.tagName.toLowerCase() == 'h2'){
+            addClass(target.parentNode,'active');
+        }
         statusToAll();
     }
     function childCateClick(target){
         var leftContent = document.querySelector('.left-content');
         clearActive(leftContent);
-        addClass(target,'active');
+        if(target.tagName.toLowerCase() == 'h3'){
+            addClass(target,'active');
+        }
+        else if(target.parentNode.tagName.toLowerCase() == 'h3'){
+            addClass(target.parentNode,'active');
+        }
         statusToAll();
     }
     function cateDelete(event){
