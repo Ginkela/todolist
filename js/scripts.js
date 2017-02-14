@@ -158,7 +158,7 @@ window.onload = function(){
         {
             id: 0,
             name: '默认子分类',
-            child: [0,1]
+            child: [0]
         }
 //        {
 //            id: 1,
