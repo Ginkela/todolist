@@ -173,22 +173,13 @@ window.onload = function(){
             finish: true,
             date:'2017-01-01',
             content: "内容1231241243143"
-        },
-        {
-            id: 1,
-            pid: 0,
-            name: '123123',
-            finish: false,
-            date:'2017-02-01',
-            content: "内容dsadsd1243143"
-                       
         }];
-//        if(!localStorage.init){
+        if(!localStorage.init){
             localStorage.cate = JSON.stringify(cate);
             localStorage.childCate = JSON.stringify(childCate);
             localStorage.task = JSON.stringify(task);
-//            localStorage.init = true;
-//        }
+            localStorage.init = true;
+        }
         
         
     }
@@ -198,16 +189,32 @@ window.onload = function(){
         var childCate = JSON.parse(localStorage.childCate);
         var leftContent = document.querySelector('.left-content');
         var cateContent = document.getElementById('cate-content');
+        var unfinishTasks = queryUnfinishedTask();
+        console.log(unfinishTasks);
+        document.getElementById('unfinishTasks').innerHTML = '('+unfinishTasks.length+')';
+        var arr = [];
         var html = '';
         for (var i=0;i<cate.length;i++){
             if(i == 0){
-                html += '<li><h2 cateid=0><i class="fa fa-folder-open"></i>默认主分类<span></span></h2>'+
-                        '<ul><li><h3 childid=0><i class="fa fa-file-o"></i>默认子分类<span></span></h3></li></ul></li>';
+                html += '<li><h2 cateid=0><i class="fa fa-folder-open"></i>默认主分类<span>(0)</span></h2>'+
+                        '<ul><li><h3 childid=0><i class="fa fa-file-o"></i>默认子分类<span>(0)</span></h3></li></ul></li>';
             }else{
-                html += '<li><h2 cateid='+cate[i].id+'><i class="fa fa-folder-open"></i>'+cate[i].name+'<span></span><i class="fa fa-trash-o"></i></h2>';
+                var unfinishCate = 0;
+                for(var k=0;k<unfinishTasks.length;k++){
+                    if(cate[i].child.indexOf(unfinishTasks[k].pid)>=0){
+                        unfinishCate++;
+                    }
+                }
+                html += '<li><h2 cateid='+cate[i].id+'><i class="fa fa-folder-open"></i>'+cate[i].name+'<span>('+unfinishCate+')</span><i class="fa fa-trash-o"></i></h2>';
                 for(j=0;j<cate[i].child.length;j++){
                     var childCateId = cate[i].child[j];
-                    html += '<ul><li><h3 childid='+childCateId+'><i class="fa fa-file-o"></i>'+childCate[childCateId].name+'<span></span><i class="fa fa-trash-o"></i></h3></li></ul>';
+                    var unfinishChild = 0;
+                    for(var k=0;k<unfinishTasks.length;k++){
+                        if(unfinishTasks[k].pid == childCateId){
+                            unfinishChild++;
+                        }
+                    }
+                    html += '<ul><li><h3 childid='+childCateId+'><i class="fa fa-file-o"></i>'+childCate[childCateId].name+'<span>('+unfinishChild+')</span><i class="fa fa-trash-o"></i></h3></li></ul>';
                 }                    
             }
             html += '</li>';
@@ -341,6 +348,16 @@ window.onload = function(){
             document.getElementById('display-date').innerHTML = chooseTaskDate;
             document.getElementById('display-content').innerHTML = chooseTaskContent;
         }
+    }
+    function queryUnfinishedTask(){
+        var allTask = JSON.parse(localStorage.task); 
+        var arr = [];
+        for(var i=0;i<allTask.length;i++){
+            if(allTask[i].finish == false){
+                arr.push(allTask[i]);
+            }
+        }
+        return arr;
     }
     function clickAllTask(){
         var leftContent = document.querySelector('.left-content');
@@ -647,6 +664,7 @@ window.onload = function(){
                 }
             }
             statusToAll();
+            initLeftContent();
             taskDisplay();
         }
     }
@@ -670,6 +688,7 @@ window.onload = function(){
         var set = document.querySelector('.set');
         set.style.display = 'none';
         statusToAll();
+        initLeftContent();
     }
     function taskDisplay(){
         document.querySelector('#inputTitle').value = '';
