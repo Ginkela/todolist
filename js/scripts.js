@@ -50,6 +50,9 @@ window.onload = function(){
     EventUtil.addHandler(document.querySelector('.addcate'),"click",clickAddCate);//增加分类的点击事件
     EventUtil.addHandler(document.querySelector('#ok'),"click",cateAdd);//增加分类的弹出窗口确定按钮的点击事件
     EventUtil.addHandler(document.querySelector('#no'),"click",coverHide);//增加分类的弹出窗口取消按钮的点击事件
+    EventUtil.addHandler(document.querySelector('#cover'),"keydown",function(event){
+        coverOnKeyDown(event);
+    });
     EventUtil.addHandler(document.querySelector('#alltask'),"click",clickAllTask);//所有任务的点击事件
     EventUtil.addHandler(document.querySelector('.left-content'),"click",function(event){//分类栏部分事件委托
         event = EventUtil.getEvent(event);
@@ -172,7 +175,7 @@ window.onload = function(){
             name: '使用说明',
             finish: true,
             date:'2017-01-01',
-            content: "内容1231241243143"
+            content: "点击新增分类创建主分类，再点击新增分类选择一个主分类创建一个子分类，选择子分类后点击新建任务创建任务。"
         }];
         if(!localStorage.init){
             localStorage.cate = JSON.stringify(cate);
@@ -815,6 +818,13 @@ window.onload = function(){
     }
     function queryChooseTask(){
         return document.querySelector('.task-list .active');
+    }
+    function coverOnKeyDown(event){
+        var event = EventUtil.getEvent(event);
+        var x = event.which || event.keyCode;
+        if(x == 13){
+            document.querySelector('#ok').click();
+        }
     }
     function sortDate(a,b){
         if(a > b){
